@@ -6,9 +6,10 @@ Defines Source and Metric with strict validation.
 from __future__ import annotations
 from typing import List, Literal, Tuple
 from pydantic import BaseModel, HttpUrl, field_validator, model_validator, ConfigDict
+from urllib.parse import urlparse
 import re
 
-from hef_metrics_generator.utils.constants import MAX_METRIC_NAME_LEN
+from hef_metrics_generator.utils.constants import MAX_METRIC_NAME_LEN, TRUSTED_DOMAINS
 
 _ALPHA_WORDS_RE = re.compile(r"^[A-Za-z ]+$")
 _METRIC_NAME_RE = re.compile(r"^[A-Za-z0-9 \-\(\)_/]+$")
@@ -109,10 +110,19 @@ class Metric(BaseModel):
 
     @field_validator("sources")
     @classmethod
-    def _validate_sources(cls, v: List[Source]) -> List[Source]:
-        if not v:
-            raise ValueError("sources must not be empty")
-        return v
+    def _filter_sources(cls, v: List[Source]) -> List[Source]:
+        """
+        Keep only sources from trusted domains.
+        Drop untrusted ones silently.
+        """
+        trusted = []
+        for s in v:
+            host = urlparse(str(s.url)).netloc
+            if any(domain in host for domain in TRUSTED_DOMAINS):
+                trusted.append(s)
+        if not trusted:
+            raise ValueError("no valid sources left after filtering untrusted domains")
+        return trusted
 
     @model_validator(mode="after")
     def _validate_min_max_combo(self) -> "Metric":

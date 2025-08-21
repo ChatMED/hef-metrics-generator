@@ -2,7 +2,7 @@
 DuckDuckGo Tool for hef_metrics_generator.
 
 LangChain-compatible tool for querying DuckDuckGo.
-Returns structured title/URL pairs. Includes retry/backoff and standardized logging.
+Returns structured title/URL pairs. Includes retry/backoff, standardized logging, and trusted-domain filtering.
 """
 
 import logging
@@ -11,8 +11,14 @@ from langchain.tools import tool
 from duckduckgo_search import DDGS
 
 from hef_metrics_generator.logs.tool_query_logger import query_logger
+from hef_metrics_generator.utils.constants import TRUSTED_DOMAINS
 
 logger = logging.getLogger("ddg_tool")
+
+
+def _is_trusted(url: str) -> bool:
+    """Return True if URL belongs to a trusted domain."""
+    return any(domain in url for domain in TRUSTED_DOMAINS)
 
 
 def _ddg_with_retry(query: str, retries: int = 2, backoff: float = 2.0):
@@ -60,10 +66,16 @@ def ddg_tool(query: str) -> list:
     raw_results = _ddg_with_retry(query)
     formatted = []
     for r in raw_results:
+        url = r.get("href") or r.get("link") or ""
+        if not url:
+            continue
+        if not _is_trusted(url):
+            logger.debug(f"[DuckDuckGo] Dropping untrusted domain: {url}")
+            continue
         formatted.append({
             "title": r.get("title", "No Title"),
-            "url": r.get("href") or r.get("link") or ""
+            "url": url
         })
 
-    logger.info(f"[DuckDuckGo] Found {len(formatted)} results.")
+    logger.info(f"[DuckDuckGo] Returning {len(formatted)} trusted results.")
     return formatted
