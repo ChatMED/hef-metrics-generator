@@ -1,0 +1,16 @@
+[PubMed Tool] Query:: LLM evaluation diagnosis medicine
+[ArXiv Tool] Query:: LLM evaluation diagnosis medicine
+[Semantic Scholar Tool] Query:: LLM evaluation diagnosis medicine
+[OpenAlex Tool] Query:: LLM evaluation diagnosis medicine
+[PubMed Tool] Query:: human eval generative AI gastroenterology
+[ArXiv Tool] Query:: human eval generative AI gastroenterology
+[Semantic Scholar Tool] Query:: human eval generative AI gastroenterology
+[OpenAlex Tool] Query:: human eval generative AI gastroenterology
+[PubMed Tool] Query:: benchmark rubric medicine
+[ArXiv Tool] Query:: benchmark rubric medicine
+[Semantic Scholar Tool] Query:: benchmark rubric medicine
+[OpenAlex Tool] Query:: benchmark rubric medicine
+[PubMed Tool] Query:: evaluation rubric gastroenterology
+[ArXiv Tool] Query:: evaluation rubric gastroenterology
+[Semantic Scholar Tool] Query:: evaluation rubric gastroenterology
+[OpenAlex Tool] Query:: evaluation rubric gastroenterology

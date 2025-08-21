@@ -1,0 +1,48 @@
+[build-system]
+requires = ["setuptools>=69", "wheel", "build"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hef-metrics-generator"
+version = "0.1.0"
+description = "Library for generating evaluation metrics with strict validation, provenance, and citation integrity. Developed by Ana Todorovska, PhD candidate, under the ChatMED project (Horizon Europe, ID: 101159214) at the Faculty of Computer Science and Engineering, Ss. Cyril and Methodius University in Skopje."
+readme = "README.md"
+requires-python = ">=3.9,<3.11"
+license = { text = "MIT" }
+authors = [{ name = "Ana Todorovska", email = "ana.todorovska@finki.ukim.mk" }]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Development Status :: 3 - Alpha",
+    "License :: OSI Approved :: MIT License",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering :: Information Analysis"
+]
+keywords = ["evaluation", "metrics", "LLM", "healthcare", "ChatMED", "provenance", "citations"]
+dependencies = [
+    "langchain>=0.3.27,<0.4",
+    "langchain-core>=0.3.74,<0.4",
+    "langchain-openai>=0.3.30,<0.4",
+    "duckduckgo-search>=8.1.1,<9.0",
+    "feedparser>=6.0,<7.0",
+    "python-dotenv>=1.1.1,<2.0",
+    "biopython>=1.85,<2.0",
+    "pydantic>=2.6,<3.0",
+    "requests>=2.31,<3.0",
+]
+
+
+[project.urls]
+Homepage = "https://chatmed-project.eu/"
+Funding = "https://cordis.europa.eu/project/id/101159214"
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["hef_metrics_generator*"]
+exclude = ["tests*"]
+
+[tool.setuptools.exclude-package-data]
+"*" = ["*.env", "*.pem", "*.key", "*.crt", "*.log"]

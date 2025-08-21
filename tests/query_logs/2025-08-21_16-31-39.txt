@@ -1,0 +1,12 @@
+PubMed: LLM evaluation diagnosis medicine
+ArXiv: LLM evaluation diagnosis medicine
+SemanticScholar: LLM evaluation diagnosis medicine
+OpenAlex: LLM evaluation diagnosis medicine
+PubMed: human eval generative AI gastroenterology
+ArXiv: human eval generative AI gastroenterology
+SemanticScholar: human eval generative AI gastroenterology
+OpenAlex: human eval generative AI gastroenterology
+PubMed: benchmark rubric medicine
+ArXiv: benchmark rubric medicine
+SemanticScholar: benchmark rubric medicine
+OpenAlex: benchmark rubric medicine
