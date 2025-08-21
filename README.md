@@ -59,7 +59,7 @@ Create a `.env` or export shell variables before running.
 
 ```python
 import os, json
-from hef-metrics-generator.core.generate import initialize_metric_planner_agent_executor
+from hef_metrics_generator.core.generate import initialize_metric_planner_agent_executor
 from langchain_core.runnables import RunnableConfig
 
 # 1) Ensure env is set (example values)
@@ -74,8 +74,8 @@ input_payload = {
     "task_domain": "medicine",  # letters/spaces only
     "task_field": "neurology",  # letters/spaces only
     "task_type": "patient education",  # letters/spaces only
-    "num_metrics": 10,  # exact number of metrics (1–50)
-    "min_sources_per_metric": 5  # minimum sources required per metric (1–20)
+    "num_metrics": 10,  # exact number of metrics
+    "min_sources_per_metric": 5  # minimum sources required per metric 
 }
 
 # (Optional) thread id for tracing/debug
